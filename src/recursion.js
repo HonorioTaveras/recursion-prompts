@@ -22,16 +22,27 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  let sum = 0;
+  // iterate over array
+  array.forEach((item) => {
+    (Array.isArray(item)) ? sum += arraySum(item) : sum += item;
+  });
+  return sum;
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  n = Math.abs(n);
+  return (n === 0) ? true : (n === 1) ? false : isEven(n - 2);
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  if (n === 0 || n === 1) return 0;
+  return Math.abs(n) + (Math.abs(n) - 1);
+
 };
 
 // 6. Get the integers within a range (x, y).
@@ -45,6 +56,8 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if (exp === 0) return 1;
+  return base * exponent(base, exp - 1);
 };
 
 // 8. Determine if a number is a power of two.
@@ -68,6 +81,7 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
@@ -154,6 +168,11 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
 var fibonacci = function(n) {
+  let result = [];
+  if (n <= 0) return null;
+  if (n === 1 || n === 2) return 1;
+  result.push(fibonacci(n - 2) + fibonacci(n - 1));
+  return result;
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
